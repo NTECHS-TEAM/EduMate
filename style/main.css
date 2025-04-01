@@ -4,6 +4,9 @@ body {
   margin: 0 auto;
   padding: 20px;
   background-color: #f0f8ff;
+  /* background-image: url("/public/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat; */
 }
 
 .container {
