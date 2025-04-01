@@ -41,6 +41,7 @@ button {
   background-color: #f8f9fa;
   border-radius: 5px;
   white-space: pre-wrap;
+  text-align: center;
 }
 
 .loader {

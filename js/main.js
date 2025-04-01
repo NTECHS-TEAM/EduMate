@@ -41,7 +41,9 @@ async function getRecommendation() {
     resultDiv.textContent = recommendation;
   } catch (error) {
     console.error("Lỗi:", error);
-    resultDiv.textContent = "Có lỗi xảy ra, vui lòng thử lại";
+    resultDiv.textContent =
+      "Hệ thống đang phát triển vui lòng quay lại sau!!!!!";
+    // resultDiv.textContent = "Có lỗi xảy ra, vui lòng thử lại";
   } finally {
     loader.style.display = "none";
   }
