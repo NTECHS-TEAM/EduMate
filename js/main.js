@@ -15,7 +15,7 @@ async function getRecommendation() {
     "Team mình đang tranh luận xem nên hiển thị gì… 🤼",
   ];
   if (!keyword) {
-    alert("Vui lòng nhập từ khoá");
+    alert("Nhập gì đi bạn ê 🌝");
     return;
   }
 
