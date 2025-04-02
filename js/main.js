@@ -26,6 +26,7 @@ async function getRecommendation() {
   const loader = document.querySelector("#loader");
   const loaderIcon = document.querySelector("#loader-icon");
   const button = document.querySelector("button");
+  const boxIdea = document.querySelector(".box-idea");
 
   const dataLoading = [
     "Chill đi bạn, loading xíu thôi… 😎",
@@ -52,6 +53,8 @@ async function getRecommendation() {
 
   try {
     button.disabled = true;
+    boxIdea.style.display = "none";
+
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
       {
