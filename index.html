@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gợi ý Chọn Trường Thông Minh</title>
+    <title>Trợ lý Chọn Trường Thông Minh</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,21 +13,43 @@
     <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Trợ lý Chọn Trường Thông Minh</h1>
-      <div class="search-box">
-        <input
-          type="text"
-          id="keyword"
-          placeholder="Nhập từ khoá (ví dụ: kỹ thuật, kinh tế, Hà Nội...)"
-        />
-        <button onclick="getRecommendation()">Tư vấn</button>
+    <div class="header">
+      <div class="menu">
+        <h2>Nhóm</h2>
+        <div class="support">
+          <span>Hỗ trợ <i class="fa-solid fa-headset"></i></span>
+        </div>
       </div>
-      <div class="loader" id="loader"></div>
-      <div class="loader-icon" id="loader-icon"></div>
-      <div class="result" id="result"></div>
+    </div>
+    <div class="app">
+      <div class="container">
+        <h1>Trợ lý Chọn Trường Thông Minh</h1>
+        <div class="search-box">
+          <input
+            type="text"
+            id="keyword"
+            placeholder="Nhập từ khoá (ví dụ: kỹ thuật, kinh tế, Hà Nội...)"
+          />
+          <button onclick="getRecommendation()">Tư vấn</button>
+        </div>
+        <div class="box-idea">
+          <div class="idea">
+            <span><i class="fa-solid fa-lightbulb"></i> Gợi ý </span>
+          </div>
+          <div class="content">
+            <ul class="list-idea"></ul>
+          </div>
+        </div>
+        <div class="loader" id="loader"></div>
+        <div class="loader-icon" id="loader-icon"></div>
+        <div class="result" id="result"></div>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c1f0346f31.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="./js/main.js"></script>
   </body>
 </html>

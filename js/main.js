@@ -1,5 +1,25 @@
 const API_KEY = "AIzaSyBRvqJLeuk4IRinZ1JRHfjdZsPEgF_p9b0";
 let countEnter = 0;
+
+const keywordSuggestions = () => {
+  const idea = document.querySelector(".list-idea");
+
+  if (!idea) return;
+
+  const keyword = [
+    "Công nghệ thông tin",
+    "Marketing",
+    "Kế toán",
+    "Thiết kế đồ họa",
+    "Kinh tế",
+  ];
+
+  idea.innerHTML = keyword.map((item) => `<li>${item}</li>`).join("");
+};
+
+// Gọi hàm sau khi DOM đã tải xong
+document.addEventListener("DOMContentLoaded", keywordSuggestions);
+
 async function getRecommendation() {
   const keyword = document.querySelector("#keyword").value;
   const resultDiv = document.querySelector("#result");
@@ -22,6 +42,8 @@ async function getRecommendation() {
   loader.style.display = "block";
   loaderIcon.style.display = "block";
   loader.innerText = dataLoading[Math.floor(Math.random() * 5)];
+  console.log(Math.floor(Math.random() * 5));
+
   resultDiv.textContent = "";
   if (countEnter >= 5) {
     loader.innerText = "Bình tĩnh bạn ơi, app chưa kịp thở đây nè 🌬️";
@@ -43,6 +65,7 @@ async function getRecommendation() {
               parts: [
                 {
                   text: `Hãy gợi ý các trường đại học/cao đẳng tại Việt Nam phù hợp với các tiêu chí sau: ${keyword}. \nCho biết lý do phù hợp cho từng trường. Định dạng: \n1. Tên trường\n- Địa điểm: \n- Chuyên ngành nổi bật: \n- Lý do phù hợp:`,
+                  // text: `${keyword}`,
                 },
               ],
             },
