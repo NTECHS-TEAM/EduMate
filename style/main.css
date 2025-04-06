@@ -115,7 +115,7 @@ button:hover {
 }
 .result {
   margin-top: 20px;
-  padding: 15px;
+  padding: 15px 15px 15px 25px;
   /* background-color: #f8f9fa; */
   border-radius: 5px;
   white-space: pre-wrap;
@@ -200,7 +200,14 @@ button:disabled {
   background-color: oklch(95.43% 0.0074 260.73);
   /* color: #fff; */
 }
-
+.navbar .list .active {
+  background-color: oklch(95.43% 0.0074 260.73);
+}
+.navbar .list li .date-created {
+  font-size: 12px;
+  color: #333;
+  padding-top: 0.3em;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);

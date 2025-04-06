@@ -1,5 +1,15 @@
 const API_KEY = "AIzaSyBRvqJLeuk4IRinZ1JRHfjdZsPEgF_p9b0";
 
+// Lấy thời gian hiện tại và format thành dd/mm/yyyy: hh:mm:ss
+const now = new Date();
+const day = String(now.getDate()).padStart(2, "0");
+const month = String(now.getMonth() + 1).padStart(2, "0");
+const year = now.getFullYear();
+const hours = String(now.getHours()).padStart(2, "0");
+const minutes = String(now.getMinutes()).padStart(2, "0");
+const seconds = String(now.getSeconds()).padStart(2, "0");
+const formattedDate = `${day}/${month}/${year}: ${hours}:${minutes}:${seconds}`;
+
 // DOM cache
 const DOM = {
   ideaList: document.querySelector(".list-idea"),
@@ -16,13 +26,13 @@ const DOM = {
 const storage = {
   getHistory() {
     try {
-      return JSON.parse(localStorage.getItem("kq")) || [];
+      return JSON.parse(localStorage.getItem("history")) || [];
     } catch {
       return [];
     }
   },
   saveHistory(list) {
-    localStorage.setItem("kq", JSON.stringify(list));
+    localStorage.setItem("history", JSON.stringify(list));
   },
 };
 
@@ -57,8 +67,18 @@ function renderStaticIdeas() {
 // Render lịch sử search
 function renderHistory() {
   const list = storage.getHistory();
+  const params = new URLSearchParams(window.location.search);
+  const idFromUrl = params.get("id");
+  console.log(params);
+
   DOM.historyList.innerHTML = list
-    .map((item) => `<li data-id="${item.id}">${item.title}</li>`)
+    .map(
+      (item) =>
+        `<li data-id="${item.id}" class=${idFromUrl == item.id ? "active" : ""}>
+        <strong>${item.title}</strong>
+        <p class="date-created">(${item.date})</p>
+        </li>`
+    )
     .join("");
 }
 
@@ -68,6 +88,13 @@ function showKQ(id) {
   if (!item) return;
   DOM.resultDiv.innerHTML = marked.parse(item.text);
   DOM.boxIdea.style.display = "none";
+  DOM.keywordInput.value = item.title;
+
+  const params = new URLSearchParams(window.location.search);
+  params.set("id", item.id);
+
+  window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+  renderHistory();
 }
 
 // Gọi API
@@ -94,7 +121,7 @@ async function getRecommendation() {
             {
               parts: [
                 {
-                  text: `Hãy gợi ý các trường đại học/cao đẳng tại Việt Nam phù hợp với các tiêu chí sau: ${keyword}. \nCho biết lý do phù hợp cho từng trường. Định dạng: \n1. Tên trường\n- Địa điểm: \n- Chuyên ngành nổi bật: \n- Lý do phù hợp:`,
+                  text: `Hãy gợi ý các trường đại học/cao đẳng tại Việt Nam phù hợp với các tiêu chí sau: ${keyword}. \nCho biết lý do phù hợp cho từng trường. Định dạng: \n1. Tên trường\n- Địa điểm: \n- Chuyên ngành nổi bật: \n- Lý do phù hợp:\n-Nếu câu hỏi không phù hợp bạn không đưa ra câu trả lời`,
                 },
               ],
             },
@@ -113,8 +140,19 @@ async function getRecommendation() {
 
     // Cập nhật lịch sử: thêm mục mới lên đầu
     const history = storage.getHistory();
-    const newEntry = { id: genId(), title: keyword, text: recommendation };
+    const newEntry = {
+      id: genId(),
+      title: keyword,
+      text: recommendation,
+      date: formattedDate,
+    };
     storage.saveHistory([newEntry, ...history]);
+
+    const params = new URLSearchParams(window.location.search);
+    params.set("id", newEntry.id);
+    console.log(params);
+
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     renderHistory();
   } catch (err) {
     console.error("Lỗi:", err);
@@ -134,4 +172,15 @@ document.addEventListener("DOMContentLoaded", () => {
 DOM.historyList.addEventListener("click", (e) => {
   const li = e.target.closest("li[data-id]");
   if (li) showKQ(li.dataset.id);
+});
+
+// Event binding
+document.addEventListener("DOMContentLoaded", () => {
+  renderStaticIdeas();
+  renderHistory();
+  DOM.keywordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      getRecommendation();
+    }
+  });
 });
