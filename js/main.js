@@ -1,6 +1,5 @@
 const API_KEY = "AIzaSyBRvqJLeuk4IRinZ1JRHfjdZsPEgF_p9b0";
 
-// Lấy thời gian hiện tại và format thành dd/mm/yyyy: hh:mm:ss
 const now = new Date();
 const day = String(now.getDate()).padStart(2, "0");
 const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -44,6 +43,7 @@ const dataLoading = [
   "Đợi tý, team mình đang thả thính dữ liệu… 💘",
   "Team mình đang tranh luận xem nên hiển thị gì… 🤼",
 ];
+
 let countEnter = 0;
 const pickLoadingText = () => {
   const text = dataLoading[countEnter % dataLoading.length];
