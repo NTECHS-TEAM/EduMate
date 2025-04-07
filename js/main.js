@@ -69,7 +69,7 @@ function renderHistory() {
   const list = storage.getHistory();
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = params.get("id");
-  console.log(params);
+  // console.log(params);
 
   DOM.historyList.innerHTML = list
     .map(
@@ -150,7 +150,6 @@ async function getRecommendation() {
 
     const params = new URLSearchParams(window.location.search);
     params.set("id", newEntry.id);
-    console.log(params);
 
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     renderHistory();
@@ -164,10 +163,22 @@ async function getRecommendation() {
   }
 }
 
+const LoadingDataById = () => {
+  const params = new URLSearchParams(window.location.search);
+  const idFromUrl = params.get("id");
+  if (idFromUrl) {
+    const item = storage.getHistory().find((i) => i.id === idFromUrl);
+    if (!item) return;
+    DOM.resultDiv.innerHTML = marked.parse(item.text);
+    DOM.boxIdea.style.display = "none";
+  }
+};
+
 // Event binding
 document.addEventListener("DOMContentLoaded", () => {
   renderStaticIdeas();
   renderHistory();
+  LoadingDataById();
 });
 DOM.historyList.addEventListener("click", (e) => {
   const li = e.target.closest("li[data-id]");
