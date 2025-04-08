@@ -163,6 +163,18 @@ async function getRecommendation() {
   }
 }
 
+const handleClickKeyword = (e) => {
+  const keyword = e.target.textContent.trim();
+  if (keyword) {
+    DOM.keywordInput.value = keyword;
+
+    getRecommendation();
+  }
+};
+
+// Event binding cho click vào từ khóa
+DOM.ideaList.addEventListener("click", handleClickKeyword);
+
 const LoadingDataById = () => {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = params.get("id");
