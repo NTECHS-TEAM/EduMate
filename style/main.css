@@ -174,6 +174,10 @@ button:disabled {
   /* background-color: #eee; */
   border-radius: 6px;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 .navbar .list li:hover {
   background-color: oklch(95.43% 0.0074 260.73);
@@ -187,6 +191,15 @@ button:disabled {
   color: #333;
   padding-top: 0.3em;
 }
+
+.navbar .icon-delete {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 10px;
+  z-index: 5;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

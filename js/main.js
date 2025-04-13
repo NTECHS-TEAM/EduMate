@@ -75,8 +75,13 @@ function renderHistory() {
     .map(
       (item) =>
         `<li data-id="${item.id}" class=${idFromUrl == item.id ? "active" : ""}>
+        <div>
         <strong>${item.title}</strong>
         <p class="date-created">(${item.date})</p>
+        </div>
+        <img src='../public/delete.svg' class='icon-delete' data-id="${
+          item.id
+        }" />
         </li>`
     )
     .join("");
@@ -201,9 +206,24 @@ DOM.historyList.addEventListener("click", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   renderStaticIdeas();
   renderHistory();
+
   DOM.keywordInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       getRecommendation();
     }
   });
+
+  const historyItem = document.querySelectorAll(".icon-delete");
+
+  historyItem.forEach((item) => {
+    console.log(item);
+
+    // item.addEventListener("click", () => {
+    //   console.log(item);
+    // });
+  });
 });
+
+const handleRemoveHistory = () => {
+  console.log("hihi");
+};
