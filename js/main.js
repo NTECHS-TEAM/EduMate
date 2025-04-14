@@ -19,6 +19,10 @@ const DOM = {
   button: document.querySelector("button"),
   boxIdea: document.querySelector(".box-idea"),
   keywordInput: document.querySelector("#keyword"),
+  openMenuMobile: document.querySelector(".menu-mobile"),
+  closeMenuMobile: document.querySelector(".close-menu-mobile"),
+  webapp: document.querySelector(".webapp"),
+  menuMobile: document.querySelector(".navbar"),
 };
 
 // Storage helper
@@ -115,7 +119,10 @@ function showKQ(id) {
   params.set("id", item.id);
 
   window.history.pushState(null, "", `${window.location.pathname}?${params}`);
-  // renderHistory();
+  DOM.webapp.classList.remove("active");
+  DOM.menuMobile.classList.remove("active");
+  renderHistory();
+  window.location.reload();
 }
 
 // Gọi API
@@ -250,3 +257,12 @@ const handleRemoveHistory = (item, id) => {
   renderHistory();
   window.location.reload();
 };
+
+DOM.openMenuMobile.addEventListener("click", () => {
+  DOM.webapp.classList.add("active");
+  DOM.menuMobile.classList.add("active");
+});
+DOM.closeMenuMobile.addEventListener("click", () => {
+  DOM.webapp.classList.remove("active");
+  DOM.menuMobile.classList.remove("active");
+});

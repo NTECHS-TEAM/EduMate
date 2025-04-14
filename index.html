@@ -13,48 +13,60 @@
     <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
-    <div class="header">
-      <div class="menu">
-        <div class="menu-mobile">
-          <img src="./public/nav.svg" alt="" />
-        </div>
-        <h2>Nam Nhi</h2>
-        <div class="support">
-          <a
-            href="https://www.facebook.com/profile.php?id=61572965940489"
-            target="_blank"
-          >
-            <span>Hỗ trợ <i class="fa-solid fa-headset"></i></span>
-          </a>
+    <div class="webapp">
+      <div class="header">
+        <div class="menu">
+          <div class="menu-mobile">
+            <img src="./public/nav.svg" alt="" />
+          </div>
+          <h2>Nam Nhi</h2>
+          <div class="support">
+            <a
+              href="https://www.facebook.com/profile.php?id=61572965940489"
+              target="_blank"
+            >
+              <span>Hỗ trợ <i class="fa-solid fa-headset"></i></span>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="navbar">
-      <h2>Lịch sử</h2>
-      <ul class="list"></ul>
-    </div>
-    <div class="app">
-      <div class="container">
-        <h1>Trợ lý Chọn Trường Thông Minh</h1>
-        <div class="search-box">
-          <input
-            type="text"
-            id="keyword"
-            placeholder="Nhập từ khoá (ví dụ: kỹ thuật, kinh tế, Hà Nội...)"
-          />
-          <button onclick="getRecommendation()">Tư vấn</button>
-        </div>
-        <div class="box-idea">
-          <div class="idea">
-            <span><i class="fa-solid fa-lightbulb"></i> Gợi ý </span>
-          </div>
-          <div class="content">
-            <ul class="list-idea"></ul>
+      <div class="navbar">
+        <div class="content">
+          <h2>Lịch sử</h2>
+          <div>
+            <img
+              src="./public/close.svg"
+              alt=""
+              style="width: 16px; height: 16px"
+              class="close-menu-mobile"
+            />
           </div>
         </div>
-        <div class="loader" id="loader"></div>
-        <div class="loader-icon" id="loader-icon"></div>
-        <div class="result" id="result"></div>
+        <ul class="list"></ul>
+      </div>
+      <div class="app">
+        <div class="container">
+          <h1>Trợ lý Chọn Trường Thông Minh</h1>
+          <div class="search-box">
+            <input
+              type="text"
+              id="keyword"
+              placeholder="Nhập từ khoá (ví dụ: kỹ thuật, kinh tế, Hà Nội...)"
+            />
+            <button onclick="getRecommendation()">Tư vấn</button>
+          </div>
+          <div class="box-idea">
+            <div class="idea">
+              <span><i class="fa-solid fa-lightbulb"></i> Gợi ý </span>
+            </div>
+            <div class="content">
+              <ul class="list-idea"></ul>
+            </div>
+          </div>
+          <div class="loader" id="loader"></div>
+          <div class="loader-icon" id="loader-icon"></div>
+          <div class="result" id="result"></div>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

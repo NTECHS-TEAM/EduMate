@@ -64,7 +64,9 @@ body::after {
 h1 {
   padding: 0.5em 0;
 }
-
+.header .menu-mobile {
+  display: none;
+}
 .search-box {
   display: flex;
   gap: 10px;
@@ -172,9 +174,12 @@ button:disabled {
   top: 110px;
   background-color: #fff;
 }
-.navbar h2 {
+.navbar .content {
   border-bottom: 1px solid #eee;
   padding-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .navbar .list {
   list-style: none;
@@ -249,6 +254,28 @@ button:disabled {
   }
   .navbar {
     display: none;
+  }
+  .navbar.active {
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0px;
+    z-index: 999;
+  }
+  .webapp.active::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .header .menu-mobile {
+    display: block;
   }
   .header {
     padding-left: 1em;
