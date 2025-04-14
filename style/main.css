@@ -41,6 +41,14 @@ body::after {
   align-items: center;
   justify-content: space-between;
 }
+.header .menu-mobile {
+  display: flex;
+  align-items: center;
+}
+.header .menu-mobile img {
+  width: 20px;
+  height: 20px;
+}
 .support {
   cursor: pointer;
 }
@@ -241,5 +249,9 @@ button:disabled {
   }
   .navbar {
     display: none;
+  }
+  .header {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
