@@ -86,7 +86,7 @@ function renderHistory() {
         <strong>${item.title}</strong>
         <p class="date-created">(${item.date})</p>
         </div>
-        <img src='../public/delete.svg' class='icon-delete' data-id="${
+        <img src='./public/delete.svg' class='icon-delete' data-id="${
           item.id
         }" />
         </li>`
