@@ -224,6 +224,9 @@ button:disabled {
   text-align: center;
   padding-top: 40px;
 }
+.navbar .close-menu-mobile {
+  display: none;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -263,6 +266,9 @@ button:disabled {
     left: 0;
     border-radius: 0px;
     z-index: 999;
+  }
+  .navbar .close-menu-mobile {
+    display: block;
   }
   .webapp.active::after {
     content: "";
