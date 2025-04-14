@@ -70,11 +70,14 @@ function renderHistory() {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = params.get("id");
   // console.log(params);
-
-  DOM.historyList.innerHTML = list
-    .map(
-      (item) =>
-        `<li data-id="${item.id}" class=${idFromUrl == item.id ? "active" : ""}>
+  // console.log(list);
+  if (list.length > 0) {
+    DOM.historyList.innerHTML = list
+      .map(
+        (item) =>
+          `<li data-id="${item.id}" class=${
+            idFromUrl == item.id ? "active" : ""
+          }>
         <div>
         <strong>${item.title}</strong>
         <p class="date-created">(${item.date})</p>
@@ -83,9 +86,22 @@ function renderHistory() {
           item.id
         }" />
         </li>`
-    )
-    .join("");
+      )
+      .join("");
+  } else {
+    DOM.historyList.innerHTML =
+      "<p class='history-empty'>Bạn chưa có hội thoại nào</p>";
+  }
 }
+
+const handleShowInput = () => {
+  const params = new URLSearchParams(window.location.search);
+  const idFromUrl = params.get("id");
+  if (idFromUrl) {
+    const item = storage.getHistory().find((i) => i.id === idFromUrl);
+    DOM.keywordInput.value = item.title;
+  }
+};
 
 // Hiển thị kết quả đã lưu
 function showKQ(id) {
@@ -99,7 +115,7 @@ function showKQ(id) {
   params.set("id", item.id);
 
   window.history.pushState(null, "", `${window.location.pathname}?${params}`);
-  renderHistory();
+  // renderHistory();
 }
 
 // Gọi API
@@ -158,6 +174,7 @@ async function getRecommendation() {
 
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     renderHistory();
+    window.location.reload();
   } catch (err) {
     console.error("Lỗi:", err);
     DOM.resultDiv.textContent = "Có lỗi xảy ra, vui lòng thử lại";
@@ -196,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderStaticIdeas();
   renderHistory();
   LoadingDataById();
+  handleShowInput();
 });
 DOM.historyList.addEventListener("click", (e) => {
   const li = e.target.closest("li[data-id]");
@@ -212,18 +230,23 @@ document.addEventListener("DOMContentLoaded", () => {
       getRecommendation();
     }
   });
+});
 
-  const historyItem = document.querySelectorAll(".icon-delete");
-
-  historyItem.forEach((item) => {
-    console.log(item);
-
-    // item.addEventListener("click", () => {
-    //   console.log(item);
-    // });
+document.addEventListener("DOMContentLoaded", () => {
+  let historyItem = document.querySelectorAll(".icon-delete");
+  [...historyItem].forEach((item) => {
+    item.addEventListener("click", (e) => {
+      const id = e.target.closest("img[data-id]");
+      if (id) handleRemoveHistory(item, id.dataset.id);
+    });
   });
 });
 
-const handleRemoveHistory = () => {
-  console.log("hihi");
+const handleRemoveHistory = (item, id) => {
+  const listHistory = storage.getHistory();
+
+  const test = listHistory.filter((item) => item?.id !== id);
+  storage.saveHistory(test);
+  renderHistory();
+  window.location.reload();
 };

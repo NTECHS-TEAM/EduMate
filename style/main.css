@@ -44,6 +44,9 @@ body::after {
 .support {
   cursor: pointer;
 }
+.support a {
+  color: #fff;
+}
 .container {
   background-color: white;
   padding: 30px;
@@ -161,7 +164,10 @@ button:disabled {
   top: 110px;
   background-color: #fff;
 }
-
+.navbar h2 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5em;
+}
 .navbar .list {
   list-style: none;
   padding-top: 1em;
@@ -188,7 +194,7 @@ button:disabled {
 }
 .navbar .list li .date-created {
   font-size: 12px;
-  color: #333;
+  color: #686868;
   padding-top: 0.3em;
 }
 
@@ -199,7 +205,12 @@ button:disabled {
   right: 10px;
   z-index: 5;
 }
-
+.navbar .history-empty {
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 40px;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
